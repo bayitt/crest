@@ -13,7 +13,7 @@ export class RedirectModel {
     const pool = getDatabasePool();
 
     return await pool.query(
-      `SELECT * FROM "Redirect" WHERE link = $1`,
+      `SELECT * FROM "Redirect" WHERE link = $1 LIMIT 1`,
       [link],
       (pgError, results) => {
         if (pgError) {
