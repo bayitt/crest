@@ -4,6 +4,7 @@ export type Article = {
   title: string;
   uuid: string;
   slug: string;
+  status: boolean;
   created_at: string;
   updated_at: string;
 };
