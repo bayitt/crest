@@ -1,4 +1,4 @@
-import { Pool } from "node-postgres";
+import { Pool } from "pg";
 
 let pool: Pool;
 

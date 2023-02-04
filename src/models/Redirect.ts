@@ -5,11 +5,11 @@ export class Redirect {
     const pool = getDatabasePool();
 
     return pool.query(
-      "SELECT * FROM redirects WHERE link = $1",
+      `SELECT * FROM "Redirect" WHERE link = $1`,
       [link],
       (error, results) => {
         if (error) throw error;
-        console.log(results);
+        console.log(results.rows);
         return results.rows;
       }
     );
