@@ -13,7 +13,6 @@ export const initErrorHandler = (app: Express) => {
       response: Response,
       next: NextFunction
     ) => {
-      console.log(error);
       const statusCode = error?.statusCode ?? 500;
       const message = error.message;
 
