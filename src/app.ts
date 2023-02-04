@@ -1,5 +1,10 @@
 import express from "express";
-import { bootstrap, initDatabase, loadEnv } from "./utilities";
+import {
+  bootstrap,
+  initDatabase,
+  initErrorHandler,
+  loadEnv,
+} from "./utilities";
 import { redirectRouter } from "./routes";
 
 // Loading up relevant environment variables
@@ -14,5 +19,7 @@ app.use("/", redirectRouter);
 
 // Initializing connection to the database
 initDatabase();
+
+initErrorHandler(app);
 
 bootstrap(app);

@@ -1,20 +1,19 @@
 import { getDatabasePool, CustomError } from "../utilities";
 
-export type Redirect = {
+export type Article = {
+  title: string;
   uuid: string;
-  link: string;
-  article_uuid: string;
+  slug: string;
   created_at: string;
   updated_at: string;
 };
-
-export class RedirectModel {
-  static async findByLink(link: string, callback: (rows: Redirect[]) => void) {
+export class ArticleModel {
+  static async findByUuid(uuid: string, callback: (rows: Article[]) => void) {
     const pool = getDatabasePool();
 
     return await pool.query(
-      `SELECT * FROM "Redirect" WHERE link = $1`,
-      [link],
+      `SELECT * FROM "Article" WHERE uuid = $1`,
+      [uuid],
       (pgError, results) => {
         if (pgError) {
           const error = new CustomError(

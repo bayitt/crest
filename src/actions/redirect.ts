@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { Redirect } from "../models";
+import { Redirect, RedirectModel } from "../models";
 
 export const redirect = async (
   request: Request,
@@ -7,6 +7,18 @@ export const redirect = async (
   next: NextFunction
 ) => {
   const { params } = request;
-  await Redirect.findByLink(params?.link ?? "");
+
+  const handleRedirect = (redirects: Redirect[]) => {
+    if (redirects.length === 0)
+      return response
+        .status(404)
+        .json({ message: "the link you requested for does not exist" });
+  };
+
+  const rows = await RedirectModel.findByLink(
+    params?.link ?? "",
+    handleRedirect
+  );
+  console.log(rows);
   response.json({ eme: "" });
 };

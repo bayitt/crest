@@ -1,2 +1,2 @@
-export * from "./Post";
+export * from "./Article";
 export * from "./Redirect";
