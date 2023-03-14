@@ -20,9 +20,9 @@ export const redirect = async (
 
     const article = articles[0];
     const articleUrl =
-      blogUrl + article?.slug?.startsWith("/")
-        ? article?.slug
-        : "/" + article?.slug;
+      blogUrl +
+      (article?.slug?.startsWith("/") ? article?.slug : "/" + article?.slug);
+
     response.redirect(302, articleUrl);
   };
 
