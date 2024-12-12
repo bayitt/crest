@@ -5,8 +5,7 @@ import {
   initErrorHandler,
   loadEnv,
 } from "./utilities";
-import { Request, Response, NextFunction } from "express";
-import { redirectRouter } from "./routes";
+import { redirectRouter, pingRouter } from "./routes";
 
 loadEnv();
 
@@ -15,12 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.post(
-  "/ping",
-  (request: Request, response: Response, next: NextFunction) => {
-    return response.status(200).json({ status: "ok" });
-  }
-);
+app.use("/ping", pingRouter);
 app.use("/", redirectRouter);
 
 initDatabase();
