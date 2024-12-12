@@ -11,7 +11,15 @@ export const redirect = async (
 
   if (!params?.link) return response.redirect(302, blogUrl);
 
-  const handleArticleCheck = (articles: Article[]) => {
+  const handleArticleCheck = (articles: Article[], error?: Error) => {
+    if (error) {
+      response.status(500).json({
+        message: "there was a problem completing the request",
+        statusCode: 500,
+      });
+      return response.end();
+    }
+
     if (articles.length === 0 || !articles[0].status)
       return response.status(404).json({
         message: "the link you requested for does not exist",
@@ -26,7 +34,15 @@ export const redirect = async (
     response.redirect(302, articleUrl);
   };
 
-  const handleRedirectCheck = (redirects: Redirect[]) => {
+  const handleRedirectCheck = (redirects: Redirect[], error?: Error) => {
+    if (error) {
+      response.status(500).json({
+        message: "there was a problem completing the request",
+        statusCode: 500,
+      });
+      return response.end();
+    }
+
     if (redirects.length === 0)
       return response.status(404).json({
         message: "the link you requested for does not exist",
